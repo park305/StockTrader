@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Symbol:</strong>
+  <%= @stock.symbol %>
+</p>
+
+<p>
+  <strong>Market Price:</strong>
+  <%= number_to_currency stock_price(@stock.symbol) %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= number_to_currency @stock.cost %>
+</p>
+
+<p>
+  <strong>Shares:</strong>
+  <%= @stock.shares %>
+</p>
+
+<p>
+    		<%= render 'trades' %>
+
+	</p>
+
+<%= link_to 'Edit', edit_stock_path(@stock) %> |
+<%= link_to 'Back', stocks_path %>

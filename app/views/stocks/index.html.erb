@@ -1,0 +1,36 @@
+<h1>Listing stocks</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Market Price</th>
+      <th>Cost</th>
+      <th>Shares</th>
+      <th>Profit/Loss</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocks.each do |stock| %>
+    <% marketprice = stock_price(stock.symbol) %>
+      <tr>
+        <td><%= stock.symbol.upcase %></td>
+        <td><%= number_to_currency marketprice %></td>        
+        <td><%= number_to_currency stock.cost %></td>
+        <td><%= stock.shares %></td>
+        <td><%= calculate_profitloss(marketprice, stock.cost) %></td>
+        <td><%= link_to 'Show', stock %></td>
+        <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
+        <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stock', new_stock_path %>

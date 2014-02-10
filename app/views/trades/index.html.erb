@@ -1,0 +1,36 @@
+<h1>Listing trades</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Shares</th>
+      <th>Date posted</th>
+      <th>Stock</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trades.each do |trade| %>
+      <tr>
+        <td><%= trade.action.upcase %></td>
+        <td><%= trade.status %></td>
+        <td><%= number_to_currency trade.price %></td>
+        <td><%= trade.shares %></td>
+        <td><%= trade.date_posted.to_date %></td>
+        <td><%= link_to 'Show', [@stock, trade] %></td>
+        <td><%= link_to 'Edit', [:edit, @stock, trade] %></td>
+        <td><%= link_to 'Destroy', [@stock, trade], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trade', [:new, @stock, :trade] %>
