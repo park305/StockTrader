@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  Overall Profit/Loss: <%= number_to_currency @overall %>
+</p>
+<p>
+  Percentage? <%= @overall/@totalcost unless @totalcost == 0 %>
+</p>
 <p>
   <strong>Symbol:</strong>
   <%= @stock.symbol %>

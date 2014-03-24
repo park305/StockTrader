@@ -1,0 +1,62 @@
+<h1>New stock</h1>
+    <% @sellStocks.each do |stock| %>
+      <%= stock.price %><br />
+    <% end %>
+<%= form_for(@stock) do |f| %>
+  <% if @stock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+      <% @stock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :symbol %><br>
+    <%= f.text_field :symbol %>
+  </div>
+        <% if false %>
+        <div class="field">
+          <%= f.label :cost %><br>
+          <%= f.text_field :cost %>
+        </div>
+        <div class="field">
+          <%= f.label :shares %><br>
+          <%= f.number_field :shares %>
+        </div>
+      <% end %>
+
+  <%= fields_for :trade do |trade_fields| %>
+	  <div class="field">
+	    <%= trade_fields.label :action %><br>
+	    <%= trade_fields.text_field :action %>
+	  </div>
+	  <div class="field">
+	    <%= trade_fields.label :status %><br>
+	    <%= trade_fields.text_field :status %>
+	  </div>
+	  <div class="field">
+	    <%= trade_fields.label :price %><br>
+	    <%= trade_fields.text_field :price %>
+	  </div>
+	  <div class="field">
+	    <%= trade_fields.label :shares %><br>
+	    <%= trade_fields.number_field :shares %>
+	  </div>
+	  <div class="field">
+	    <%= trade_fields.label :date_posted %><br>
+	    <%= trade_fields.date_select :date_posted %>
+	  </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', stocks_path %>

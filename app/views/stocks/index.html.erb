@@ -1,5 +1,7 @@
 <h1>Listing stocks</h1>
 
+
+<p>Total Profit: <%= number_to_currency @overall %></p>
 <table class="table">
   <thead>
     <tr>
@@ -7,6 +9,8 @@
       <th>Market Price</th>
       <th>Cost</th>
       <th>Shares</th>
+      <th>Current Value</th>
+      <th>Cost Basis</th>          
       <th>Profit/Loss</th>
       <th></th>
       <th></th>
@@ -16,13 +20,27 @@
 
   <tbody>
     <% @stocks.each do |stock| %>
+    <% cost_basis = stock.shares * stock.cost %>
     <% marketprice = stock_price(stock.symbol) %>
+    <% marketprice = 0 unless marketprice.to_f > 0 %>  
+    <% if marketprice.to_f > 0
+        cur_basis = marketprice.to_f * stock.shares 
+      else 
+        cur_basis = 0
+      end   
+    %>    
       <tr>
         <td><%= stock.symbol.upcase %></td>
         <td><%= number_to_currency marketprice %></td>        
         <td><%= number_to_currency stock.cost %></td>
         <td><%= stock.shares %></td>
-        <td><%= calculate_profitloss(marketprice, stock.cost) %></td>
+        <td><%= number_to_currency cur_basis %></td>
+        <td><%= number_to_currency cost_basis %></td>          
+        <td>
+          <% if(stock.cost) %>
+            <%= calculate_profitloss(marketprice, stock.cost) %>
+          <% end %>
+          </td>
         <td><%= link_to 'Show', stock %></td>
         <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
         <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>

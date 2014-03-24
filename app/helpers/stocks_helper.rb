@@ -2,6 +2,9 @@ module StocksHelper
  require 'net/http'
 
   def calculate_profitloss(marketprice, cost)
+    if cost == 0
+      return 0
+    end
   	difference = marketprice.to_f - cost
   	percentage = (difference/cost) * 100
     percentage = percentage.round(2)

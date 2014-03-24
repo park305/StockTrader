@@ -11,21 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209193333) do
+ActiveRecord::Schema.define(version: 20140223004055) do
 
   create_table "stocks", force: true do |t|
     t.string   "symbol"
-    t.decimal  "cost"
-    t.integer  "shares"
+    t.decimal  "cost",       default: 0.0
+    t.integer  "shares",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "stocks", ["symbol"], name: "index_stocks_on_symbol", unique: true
+
   create_table "trades", force: true do |t|
     t.string   "action"
-    t.string   "status"
-    t.decimal  "price"
-    t.integer  "shares"
+    t.string   "status",      default: "Active"
+    t.decimal  "price",       default: 0.0
+    t.integer  "shares",      default: 0
     t.datetime "date_posted"
     t.integer  "stock_id"
     t.datetime "created_at"

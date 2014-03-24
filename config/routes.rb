@@ -1,6 +1,12 @@
 StockTrader::Application.routes.draw do
   #resources :trades
 
+  get 'testdispatch' => 'stocks#dispatchtest'
+  get 'newtest' => 'stocks#newtest'
+
+  get 'uploadCSV' => 'stocks#uploadCSV'
+  post 'upload' => 'stocks#upload'
+
   resources :stocks do
     resources :trades
   end
