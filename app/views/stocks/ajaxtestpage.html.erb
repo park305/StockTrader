@@ -1,0 +1,53 @@
+
+<%= link_to "Preview Widget", :action => 'dispatchtest' , :id => @stock, :remote => true %>
+<a href="deleter" class="delete_post" data-confirm="Are you sure?" data-remote="true" rel="nofollow">Destroy</a>
+	  <div class="field">
+	   
+	  </div>
+    <div class="field">
+      <select id="action">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</opion>
+        </select>
+    </div>
+
+<div id="updatefield"></div>
+
+<div id="sellfield">hi</div>
+<div id="buyfield">hi2</div>
+<script type="text/javascript">
+$(function($) {
+
+    $("#action").change(function() {
+ $.get("<%= url_for :action => 'deleteer' %>", { selected: this.value}, null, "script");
+    	   //$.post(that.attr('rel'), {id: that.val()}, null, "script");
+
+
+//var jqxhr = $.get( "<%= url_for :action => 'ajaxtest' %>", { selected: this.value});
+
+/*
+.done(function() {
+alert( "second success" );
+})
+.fail(function() {
+alert( "error" );
+})
+.always(function() {
+alert( "finished" );
+});
+*/
+// Perform other work here ...
+// Set another completion function for the request above
+//jqxhr.always(function(data) {
+//alert( "done : " + data);
+//alert(this.value);
+//$("#updatefield").html(data);
+
+//});
+
+//})
+    });
+
+
+});
+</script>

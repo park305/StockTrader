@@ -15,6 +15,33 @@ class StocksController < ApplicationController
     render :inline => 'holyshit'
   end
 
+  def deleter
+    respond_to do |format|
+      format.html 
+      format.js   
+    end
+  end
+  def deleteer
+    @action = params[:selected]
+    if @action == "sell"
+      @stocksDropDown = ""
+      @sellStocks = Stock.where("shares>0")
+      @sellStocks.each do |stock| 
+        symbol = stock.symbol.to_s
+        @stocksDropDown = @stocksDropDown + '<option value="' + symbol + '">' + symbol + '</option>'
+      end      
+      @stocksDropDown = '<select>' + @stocksDropDown + '</select>'
+    else 
+      @stocksDropDown = ""
+    end
+
+
+    respond_to do |format|
+      format.html 
+      format.js   
+    end
+  end
+
   # GET /stocks/1
   # GET /stocks/1.json
   def show
@@ -36,11 +63,61 @@ class StocksController < ApplicationController
   end
 
 
+  def ajaxtestpage    
+  end
+
   # GET /stocks/new
   def newtest
     @sellStocks = Trade.where("action=?", "SELL")
     @stock = Stock.new
   end
+
+  def ajaxtest
+    action = params[:selected]
+    if action == "sell"
+      @stocksDropDown = ""
+      @sellStocks = Stock.where("shares>0")
+      @sellStocks.each do |stock| 
+        symbol = stock.symbol.to_s
+        @stocksDropDown = @stocksDropDown + '<option value="' + symbol + '">' + symbol + '</option>'
+      end      
+      @stocksDropDown = '<select>' + @stocksDropDown + '</select>'
+      render :text => @stocksDropDown
+    else 
+      render :text => "nothing"
+    end
+  end
+
+
+  def ajaxNumShares
+    @symbol = params[:symbol]
+    @myStock = Stock.where("symbol=" + @symbol)
+    render :text => @myStock.shares
+  end
+
+
+  def ajaxtest2
+    @action = params[:selected]
+    if @action == "sell"
+      @stocksDropDown = ""
+      @sellStocks = Stock.where("shares>0")
+      @sellStocks.each do |stock| 
+        symbol = stock.symbol.to_s
+        @stocksDropDown = @stocksDropDown + '<option value="' + symbol + '">' + symbol + '</option>'
+      end      
+      @stocksDropDown = '<select>' + @stocksDropDown + '</select>'
+    else 
+      @stocksDropDown = ""
+    end
+
+
+
+    respond_to do |format|
+      format.html 
+      format.js   
+    end
+  end
+
 
   def uplaodCSV
   end

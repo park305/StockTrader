@@ -1,0 +1,15 @@
+alert("hi");
+$("#updatefield").html(<%= @stocksDropDown %>);
+
+if(@action == "sell") {
+  $("#buyfield").hide();
+  $("#sellfield").show();
+
+}
+if(@action == "buy")  {
+  $("#sellfield").hide();
+  $("#buyfield").show();
+
+}
+
+

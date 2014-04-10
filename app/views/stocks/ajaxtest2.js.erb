@@ -1,0 +1,23 @@
+alert("hi");
+
+
+
+
+alert("<%= @action %>");
+
+if("<%= @action %>" == "sell") {
+  $("#buyfield").hide();
+  $("#sellfield").show();
+  //$("#updatefield").html('<select>');
+  $("#updatefield").html('<%= @stocksDropDown.html_safe %>');
+
+  $("#numshares").html('<%= @numShares %>');
+}
+if("<%= @action %>" == "buy")  {
+  $("#sellfield").hide();
+  $("#buyfield").show();
+
+}
+
+
+alert("hi");

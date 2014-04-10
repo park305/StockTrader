@@ -4,9 +4,17 @@ StockTrader::Application.routes.draw do
   get 'testdispatch' => 'stocks#dispatchtest'
   get 'newtest' => 'stocks#newtest'
 
+  get 'ajaxtest' => 'stocks#ajaxtest'
+  get 'deleteer' => 'stocks#deleteer'
+  
   get 'uploadCSV' => 'stocks#uploadCSV'
   post 'upload' => 'stocks#upload'
+  get 'deleter' => 'stocks#deleter'
 
+
+  get 'ajaxtest2' => 'stocks#ajaxtest2'
+
+  get 'ajaxtestpage' => 'stocks#ajaxtestpage'
   resources :stocks do
     resources :trades
   end

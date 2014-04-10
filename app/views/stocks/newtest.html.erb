@@ -15,10 +15,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :symbol %><br>
-    <%= f.text_field :symbol %>
-  </div>
+
         <% if false %>
         <div class="field">
           <%= f.label :cost %><br>
@@ -32,9 +29,25 @@
 
   <%= fields_for :trade do |trade_fields| %>
 	  <div class="field">
-	    <%= trade_fields.label :action %><br>
-	    <%= trade_fields.text_field :action %>
+	    <%= trade_fields.label :action %><br>	    
 	  </div>
+    <div class="field">
+      <select id="action">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</opion>
+        </select>
+    </div>
+
+
+  <div class="field" id="buyfield">
+    <%= f.label :symbol %><br>
+    <%= f.text_field :symbol %>    
+  </div>
+  <div class="field" id="sellfield" style="display:none;">
+    <%= f.label :symbol %><br>    
+    <span id="updatefield">tt</span>
+  </div>
+
 	  <div class="field">
 	    <%= trade_fields.label :status %><br>
 	    <%= trade_fields.text_field :status %>
@@ -45,7 +58,7 @@
 	  </div>
 	  <div class="field">
 	    <%= trade_fields.label :shares %><br>
-	    <%= trade_fields.number_field :shares %>
+	    <%= trade_fields.number_field :shares %> <span id="numshares"></span>
 	  </div>
 	  <div class="field">
 	    <%= trade_fields.label :date_posted %><br>
@@ -60,3 +73,57 @@
 <% end %>
 
 <%= link_to 'Back', stocks_path %>
+
+
+
+<script type="text/javascript">
+$(function($) {
+    $("#action").change(function() {
+      //  $.ajax({url: '<%= url_for :action => 'ajaxtest' %>',
+//        data: 'selected=' + this.value,
+  //      dataType: 'script', success})
+// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+
+/*
+if(this.value == "sell") {
+  $("#buyfield").hide();
+  $("#sellfield").show();
+
+}
+if(this.value == "buy")  {
+  $("#sellfield").hide();
+  $("#buyfield").show();
+
+}
+*/
+ $.get("<%= url_for :action => 'ajaxtest2' %>", { selected: this.value}, null, "script");
+
+//var jqxhr = $.get( "<%= url_for :action => 'ajaxtest' %>", { selected: this.value});
+
+/*
+.done(function() {
+alert( "second success" );
+})
+.fail(function() {
+alert( "error" );
+})
+.always(function() {
+alert( "finished" );
+});
+*/
+// Perform other work here ...
+// Set another completion function for the request above
+//jqxhr.always(function(data) {
+//alert( "done : " + data);
+//alert(this.value);
+//$("#updatefield").html(data);
+
+//});
+
+//})
+    });
+
+
+});
+</script>
